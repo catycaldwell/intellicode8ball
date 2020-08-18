@@ -1,8 +1,11 @@
 ﻿/*** 
  * <Summary > 
  * 
- * The Magic 8-ball program contains a Program class with 
- * 
+ * This console app replicates a Magic 8 Ball. A Magic 8 ball,
+ *  <https://en.wikipedia.org/wiki/Magic_8-Ball>, is a game where the user asks
+ *  a Yes-No question and shakes a 8-ball object to reveal an answer. 
+ *  
+ *  Run this app, ask a Yes/No question, and type 'quit' to exit.
  *
  * **/
 
@@ -33,7 +36,7 @@ namespace Magic_8_Ball
         /// This gives the random generated pre defined 8 ball replies
         /// out of 18 given replies
         /// </summary>
-        public static void definedBallReplies()
+        public static void definedReplies()
         {
             // Create a random # (0-19)
             // because 19 replies
@@ -161,10 +164,11 @@ namespace Magic_8_Ball
         }
 
 
-        /// <summary>
-        /// This function will return text the user types
-        /// </summary>
-        /// <returns></returns>
+        /* 
+         * Create a method getQuestion() that writes "Ask a question?"
+         * to the Console and reads a String input. This method should return
+         * the string input.
+         * */
         public static string getQuestion()
         {
             // This block of code will ask user for a question

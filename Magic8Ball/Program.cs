@@ -44,7 +44,7 @@ namespace Magic8Ball
                     return;
                 }
 
-                Magic8ball.definedBallReplies();
+                Magic8ball.definedReplies();
             }
         }
     }
