@@ -49,9 +49,7 @@ namespace Magic8ball
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Magic ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("8 ");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("Ball ");
+            Console.Write("8 Ball");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("By: ");
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
