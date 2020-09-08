@@ -20,15 +20,11 @@ namespace Magic8ball
             {
                 string question = Program.promptUserForQuestion();
                 if (String.IsNullOrEmpty(question)) {
-                    //Loop back if the user didn't type a question
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Please type a question!");
+                    ColoredConsoleWrite("Please type a question!", ConsoleColor.Red);
                     continue;
                 }
 
-                // Quit the loop when user types "quit"
-                if (question.ToLower() == "quit")
-                {
+                if (String.Compare(question, "quit", StringComparison.OrdinalIgnoreCase) == 0) {
                     return;
                 }
 
@@ -45,32 +41,47 @@ namespace Magic8ball
         /// </summary>
         private static void printInfo()
         {
-            ConsoleColor originalColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Magic ");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("8 Ball ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("By: ");
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.Write("Caty Caldwell ");
-            Console.WriteLine();
-            Console.ForegroundColor = originalColor;
+            ColoredConsoleWrite("Magic ", ConsoleColor.Green);
+            ColoredConsoleWrite("8 Ball ", ConsoleColor.Blue);
+            ColoredConsoleWrite("By: ", ConsoleColor.Yellow);
+            ColoredConsoleWrite("Caty Caldwell", ConsoleColor.DarkMagenta, true);
         }
 
         /// <summary>
         /// This function will return text the user types
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The question the user typed</returns>
         private static string promptUserForQuestion()
         {
+            ColoredConsoleWrite("Ask a question?: ", ConsoleColor.DarkGray);
+            return ColoredConsoleReadLine(ConsoleColor.Black);
+        }
+
+        /// <summary>
+        /// Writes in a specific color to the console restoring default state
+        /// </summary>
+        public static void ColoredConsoleWrite(string text, ConsoleColor color, bool newLine = false)
+        {
             ConsoleColor originalColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("Ask a question?: ");
-            Console.ForegroundColor = ConsoleColor.Black;
-            String questionString = Console.ReadLine();
+            Console.ForegroundColor = color;
+            Console.Write(text);
             Console.ForegroundColor = originalColor;
-            return questionString;
+
+            if (newLine) {
+              Console.WriteLine();
+            }
+        }
+
+        public static string ColoredConsoleReadLine(ConsoleColor color)
+        {
+            String line = null;
+
+            ConsoleColor originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            line = Console.ReadLine();
+            Console.ForegroundColor = originalColor;
+
+            return line;
         }
     }
 }
