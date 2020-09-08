@@ -1,51 +1,87 @@
 ﻿using System;
-using Magic_8_Ball;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Magic8Ball
+namespace Magic8ball
 {
     class Program
     {
-        // Instantiate a randomObject to use later 
-        public static Random randomObject = new Random();
-
-        // Main Method invokation
         public static void Main(string[] args)
         {
+            Program.printInfo();
 
-            Magic8ball.programInfo();
+            Random randomGenerator = new Random();
+            Magic8ball magic8ball = new Magic8ball(randomGenerator);
 
-            // Create a while loop (loops infinitely)
             while (true)
             {
-                string questionString = Magic8ball.getQuestion();
-
-                // Create an artificial pause to mimic thinking
-                int numberOfSecondsToSleep = ((randomObject.Next(5) + 1) * 1000);
-                Console.WriteLine("Thinking...");
-                Thread.Sleep(numberOfSecondsToSleep);
-
-                //Check if user entered a question, if not run the loop back
-                if (questionString.Length == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Please type a question!");
+                string question = Program.promptUserForQuestion();
+                if (String.IsNullOrEmpty(question)) {
+                    ColoredConsoleWrite("Please type a question!", ConsoleColor.Red);
                     continue;
                 }
 
-
-                // Quit the loop when user types "quit"
-                if (questionString.ToLower() == "quit")
-                {
+                if (String.Compare(question, "quit", StringComparison.OrdinalIgnoreCase) == 0) {
                     return;
                 }
 
-                Magic8ball.definedReplies();
+                // Create an artificial pause to mimic thinking
+                int numberOfSecondsToSleep = ((randomGenerator.Next(5) + 1) * 1000);
+                Console.WriteLine("Thinking...");
+                Thread.Sleep(numberOfSecondsToSleep);
+                Console.WriteLine(magic8ball.getRandomReply());
             }
+        }
+
+        /// <summary>
+        /// This will print the name of the program and the creator of it
+        /// </summary>
+        private static void printInfo()
+        {
+            ColoredConsoleWrite("Magic ", ConsoleColor.Green);
+            ColoredConsoleWrite("8 Ball ", ConsoleColor.Blue);
+            ColoredConsoleWrite("By: ", ConsoleColor.Yellow);
+            ColoredConsoleWrite("Caty Caldwell", ConsoleColor.DarkMagenta, true);
+        }
+
+        /// <summary>
+        /// This function will return text the user types
+        /// </summary>
+        /// <returns>The question the user typed</returns>
+        private static string promptUserForQuestion()
+        {
+            ColoredConsoleWrite("Ask a question?: ", ConsoleColor.DarkGray);
+            return ColoredConsoleReadLine(ConsoleColor.Black);
+        }
+
+        /// <summary>
+        /// Writes in a specific color to the console restoring default state
+        /// </summary>
+        public static void ColoredConsoleWrite(string text, ConsoleColor color, bool newLine = false)
+        {
+            ConsoleColor originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = originalColor;
+
+            if (newLine) {
+              Console.WriteLine();
+            }
+        }
+
+        public static string ColoredConsoleReadLine(ConsoleColor color)
+        {
+            String line = null;
+
+            ConsoleColor originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            line = Console.ReadLine();
+            Console.ForegroundColor = originalColor;
+
+            return line;
         }
     }
 }
