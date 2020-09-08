@@ -36,7 +36,7 @@ namespace Magic8ball
                 int numberOfSecondsToSleep = ((randomGenerator.Next(5) + 1) * 1000);
                 Console.WriteLine("Thinking...");
                 Thread.Sleep(numberOfSecondsToSleep);
-                Console.WriteLine(Magic8ball.definedReplies());
+                Console.WriteLine(magic8ball.getRandomReply());
             }
         }
 
