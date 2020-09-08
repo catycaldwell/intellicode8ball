@@ -1,10 +1,10 @@
-﻿/*** 
- * <Summary > 
- * 
+﻿/***
+ * <Summary >
+ *
  * This console app replicates a Magic 8 Ball. A Magic 8 ball,
  *  <https://en.wikipedia.org/wiki/Magic_8-Ball>, is a game where the user asks
- *  a Yes-No question and shakes a 8-ball object to reveal an answer. 
- *  
+ *  a Yes-No question and shakes a 8-ball object to reveal an answer.
+ *
  *  Run this app, ask a Yes/No question, and type 'quit' to exit.
  *
  * **/
@@ -24,8 +24,8 @@ namespace Magic8ball
     class Magic8ball
     {
         private readonly Random _randomGenerator;
-        private readonly string[] _replies = { 
-            "YES!", 
+        private readonly string[] _replies = {
+            "YES!",
             "NO!",
             "It is certain!",
             "It is decidedly so!",
@@ -45,20 +45,20 @@ namespace Magic8ball
             "Outlook not so good.",
             "Very doubtful."
         };
-        
+
         // <summary>
         // Constructor for Magic8Ball
         // </summary>
-        public Magic8ball(Random randomGenerator = new Random()) {
-            _randomGenerator = random;
-        }            
-            
+        public Magic8ball(Random randomGenerator) {
+            _randomGenerator = randomGenerator;
+        }
+
         /// <summary>
         /// This gives a random generated pre-defined 8 ball reply
         /// </summary>
-        public static string getRandomReply()
+        public string getRandomReply()
         {
-            return _replies[randomObject.Next(_replies.Length)];
-        }        
+            return _replies[_randomGenerator.Next(_replies.Length)];
+        }
     }
 }

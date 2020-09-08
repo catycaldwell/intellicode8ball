@@ -1,5 +1,4 @@
 ﻿using System;
-using Magic_8_Ball;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,26 +11,27 @@ namespace Magic8ball
     {
         public static void Main(string[] args)
         {
-            Magic8ball.printProgramInfo();
+            Program.printInfo();
 
             Random randomGenerator = new Random();
             Magic8ball magic8ball = new Magic8ball(randomGenerator);
-            
+
             while (true)
             {
-                if (String.IsNullOrEmpty(Magic8ball.promptUserForQuestion())) {
+                string question = Program.promptUserForQuestion();
+                if (String.IsNullOrEmpty(question)) {
                     //Loop back if the user didn't type a question
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Please type a question!");
-                    continue;              
+                    continue;
                 }
-                
+
                 // Quit the loop when user types "quit"
-                if (questionString.ToLower() == "quit")
+                if (question.ToLower() == "quit")
                 {
                     return;
                 }
-                
+
                 // Create an artificial pause to mimic thinking
                 int numberOfSecondsToSleep = ((randomGenerator.Next(5) + 1) * 1000);
                 Console.WriteLine("Thinking...");
@@ -41,9 +41,9 @@ namespace Magic8ball
         }
 
         /// <summary>
-        /// This will print the name of the program and the creator of it 
+        /// This will print the name of the program and the creator of it
         /// </summary>
-        private static void printProgramInfo()
+        private static void printInfo()
         {
             ConsoleColor originalColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
